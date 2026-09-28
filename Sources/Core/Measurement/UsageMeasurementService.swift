@@ -4,8 +4,6 @@ struct MeasurementResult: Equatable {
     let measuredAt: Date
     let cellularBytes: Int64
     let quality: MeasurementQuality
-    /// Portion of `cellularBytes` attributed to Personal Hotspot clients.
-    var hotspotBytes: Int64 = 0
 }
 
 struct UsageMeasurementService {
@@ -121,7 +119,6 @@ struct UsageMeasurementService {
                 from: previousSnapshot.measuredAt,
                 to: date,
                 cellularBytes: 0,
-                hotspotBytes: nil,
                 measurementQuality: .unavailable
             )
             let committed = try repository.record(
@@ -247,28 +244,11 @@ struct UsageMeasurementService {
 
         let earliestContribution = allocations.map(\.from).min() ?? previousMeasuredAt
         let sampleStart = min(previousMeasuredAt, earliestContribution)
-        // Hotspot counters are compared with the previous snapshot only, and
-        // after a reboot they cover just the new boot session.
-        let hotspotStart = rebooted ? rebootIntervalStart : previousMeasuredAt
-        let hotspotElapsed = date.timeIntervalSince(hotspotStart)
-        let hotspot = HotspotUsageCalculator.delta(
-            previousCounters: previousSnapshot.counters,
-            currentCounters: currentCounters,
-            rebooted: rebooted,
-            cellularBytes: bytes,
-            isPlausible: { isPlausible(bytes: $0, elapsed: hotspotElapsed) }
-        )
-        // Spread hotspot bytes over the interval they were observed in, using
-        // the same time-weighted day split as cellular.
-        let hotspotAllocations: [UsageIntervalAllocation] = hotspot.bytes > 0
-            ? [UsageIntervalAllocation(bytes: hotspot.bytes, from: hotspotStart, to: date)]
-            : []
         let sample = UsageSample(
             id: UUID(),
             from: sampleStart,
             to: date,
             cellularBytes: bytes,
-            hotspotBytes: hotspot.bytes > 0 ? hotspot.bytes : nil,
             measurementQuality: quality
         )
         let snapshotToStore = snapshotPreservingMissingCellularCounters(
@@ -286,8 +266,7 @@ struct UsageMeasurementService {
             to: date,
             calendar: calendar,
             expectedPreviousMeasuredAt: previousSnapshot.measuredAt,
-            allocations: allocations,
-            hotspotAllocations: hotspotAllocations
+            allocations: allocations
         )
         guard committed else {
             if preparingCalibration { throw MeasurementError.interfaceReadFailed }
@@ -296,8 +275,7 @@ struct UsageMeasurementService {
         return MeasurementResult(
             measuredAt: date,
             cellularBytes: bytes,
-            quality: quality,
-            hotspotBytes: hotspot.bytes
+            quality: quality
         )
     }
 

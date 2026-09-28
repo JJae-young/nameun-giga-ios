@@ -103,7 +103,7 @@ struct StatisticsView: View {
                             UsageRatioRow(
                                 icon: "antenna.radiowaves.left.and.right",
                                 label: "현재 사용량",
-                                value: DataAmountFormatter.string(from: appModel.summary.iPhoneBytes ?? appModel.summary.usedBytes),
+                                value: DataAmountFormatter.string(from: appModel.summary.usedBytes),
                                 percent: 1,
                                 tint: theme.accentSkyForeground
                             )

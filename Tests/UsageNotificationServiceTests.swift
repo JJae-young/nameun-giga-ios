@@ -89,8 +89,6 @@ final class UsageNotificationServiceTests: XCTestCase {
             remainingBytes: 40 * DataBytes.gigabyte,
             usagePercent: 0.6,
             iPhoneBytes: 60 * DataBytes.gigabyte,
-            hotspotBytes: nil,
-            hotspotSupportState: .unsupported,
             todayBytes: DataBytes.gigabyte
         )
     }

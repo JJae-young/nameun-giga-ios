@@ -18,4 +18,9 @@ final class InterfaceClassifierTests: XCTestCase {
     func testTunnelNameIsNeverDoubleCountedAsCellular() {
         XCTAssertEqual(InterfaceClassifier.classify("utun2", interfaceType: 0xFF), .vpn)
     }
+
+    func testSharingInterfacesAreUnclassifiedAndExcludedFromCellularTotals() {
+        XCTAssertEqual(InterfaceClassifier.classify("bridge100"), .unknown)
+        XCTAssertEqual(InterfaceClassifier.classify("ap1"), .unknown)
+    }
 }

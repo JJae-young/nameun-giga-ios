@@ -26,7 +26,6 @@ final class UsageSummaryBuilderTests: XCTestCase {
             DailyUsage(
                 id: calendar.startOfDay(for: now),
                 cellularBytes: 7 * DataBytes.gigabyte,
-                hotspotBytes: nil,
                 totalBytes: 7 * DataBytes.gigabyte
             )
         ]
@@ -62,13 +61,11 @@ final class UsageSummaryBuilderTests: XCTestCase {
             DailyUsage(
                 id: period.start,
                 cellularBytes: 100,
-                hotspotBytes: nil,
                 totalBytes: 100
             ),
             DailyUsage(
                 id: period.end,
                 cellularBytes: 900,
-                hotspotBytes: nil,
                 totalBytes: 900
             )
         ]
@@ -154,7 +151,6 @@ final class AppModelCalibrationTests: XCTestCase {
             original.alert80 = false
             original.alert90 = false
             original.billingTimeZoneIdentifier = "Asia/Seoul"
-            original.hotspot = HotspotPlanSettings(limitBytes: 30 * DataBytes.gigabyte)
             try settings.save(plan: original)
             let now = Date.now
             try usage.save(snapshot: InterfaceCounterSnapshot(
@@ -189,7 +185,6 @@ final class AppModelCalibrationTests: XCTestCase {
             XCTAssertEqual(model.plan?.manualAdjustmentMeasuredBytes, 2_000)
             XCTAssertEqual(model.plan?.resetDay, 15)
             XCTAssertEqual(model.plan?.billingTimeZoneIdentifier, "Asia/Seoul")
-            XCTAssertNil(model.plan?.hotspot, "Discard the old hotspot input, not measurement history.")
             XCTAssertEqual(usage.dailyUsage(), history)
             XCTAssertEqual(defaults.string(forKey: "displayTheme"), "dark")
             XCTAssertEqual(settings.loadPlan(), model.plan)

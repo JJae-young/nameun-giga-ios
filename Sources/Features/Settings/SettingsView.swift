@@ -7,7 +7,6 @@ struct SettingsView: View {
     @AppStorage("visualTheme") private var visualTheme = DataViewVisualTheme.classicBlue.rawValue
     @State private var showingPlan = false
     @State private var showingCalibration = false
-    @State private var showingHotspotSync = false
     @State private var showingPrivacy = false
     @State private var showingResetConfirmation = false
     @State private var showingResetSetup = false
@@ -29,25 +28,12 @@ struct SettingsView: View {
                     }
                     .buttonStyle(.plain)
                     Button {
-                        showingHotspotSync = true
-                    } label: {
-                        SettingsRow(icon: "personalhotspot", title: "핫스팟 값 맞추기", value: hotspotLabel)
-                    }
-                    .buttonStyle(.plain)
-                    Button {
                         showingResetConfirmation = true
                     } label: {
                         SettingsRow(icon: "arrow.counterclockwise", title: "입력값 초기화", value: "다시 설정")
                     }
                     .buttonStyle(.plain)
                     .accessibilityIdentifier("reset-inputs-button")
-                }
-
-                if appModel.plan?.hotspot?.hasLimit == true {
-                    Section("핫스팟 알림") {
-                        hotspotNotificationToggle("핫스팟 80% 사용 시", keyPath: \.alert80)
-                        hotspotNotificationToggle("핫스팟 90% 사용 시", keyPath: \.alert90)
-                    }
                 }
 
                 Section("알림") {
@@ -155,9 +141,6 @@ struct SettingsView: View {
             .sheet(isPresented: $showingCalibration) {
                 CarrierUsageSyncView()
             }
-            .sheet(isPresented: $showingHotspotSync) {
-                HotspotUsageSyncView()
-            }
             .sheet(isPresented: $showingPrivacy) {
                 PrivacyInfoView()
             }
@@ -180,12 +163,6 @@ struct SettingsView: View {
         return "남은기가 \(version) (\(build))"
     }
 
-    private var hotspotLabel: String {
-        guard let hotspot = appModel.plan?.hotspot else { return "필요 시" }
-        if hotspot.manualAdjustmentPeriodStart != nil { return "적용 중" }
-        return hotspot.hasLimit ? DataAmountFormatter.string(from: hotspot.limitBytes) : "필요 시"
-    }
-
     private var calibrationLabel: String {
         guard appModel.plan?.manualAdjustmentPeriodStart != nil else { return "필요 시" }
         return "적용 중"
@@ -198,22 +175,6 @@ struct SettingsView: View {
         case .estimated: "추정"
         case .unavailable: "기준 설정 중"
         }
-    }
-
-    @ViewBuilder
-    private func hotspotNotificationToggle(
-        _ title: String,
-        keyPath: WritableKeyPath<HotspotPlanSettings, Bool>
-    ) -> some View {
-        Toggle(title, isOn: Binding(
-            get: { appModel.plan?.hotspot?[keyPath: keyPath] ?? false },
-            set: { newValue in
-                guard var plan = appModel.plan, var hotspot = plan.hotspot else { return }
-                hotspot[keyPath: keyPath] = newValue
-                plan.hotspot = hotspot
-                appModel.savePlan(plan)
-            }
-        ))
     }
 
     @ViewBuilder

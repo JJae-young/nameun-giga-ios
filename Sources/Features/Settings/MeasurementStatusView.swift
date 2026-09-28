@@ -13,22 +13,12 @@ struct MeasurementStatusView: View {
                     Spacer()
                     MeasurementStatusBadge(quality: appModel.lastQuality)
                 }
-                HStack {
-                    Label("핫스팟", systemImage: "personalhotspot")
-                    Spacer()
-                    Text(appModel.summary.hotspotSupportState == .unsupported ? "감지 전" : "감지됨 · 베타")
-                        .font(.subheadline)
-                        .foregroundStyle(theme.textSecondary)
-                }
             }
             .listRowBackground(theme.elevated)
 
             Section("측정 정보") {
                 LabeledContent("이번 주기", value: DataAmountFormatter.string(from: appModel.summary.usedBytes))
                 LabeledContent("오늘", value: DataAmountFormatter.string(from: appModel.summary.todayBytes))
-                if let hotspotBytes = appModel.summary.hotspotBytes {
-                    LabeledContent("이번 주기 핫스팟", value: DataAmountFormatter.string(from: hotspotBytes))
-                }
                 LabeledContent("최근 갱신", value: appModel.summary.generatedAt.formatted(date: .abbreviated, time: .shortened))
             }
             .listRowBackground(theme.elevated)
@@ -53,7 +43,7 @@ struct InterfaceDiagnosticsView: View {
     @State private var counters: [NetworkInterfaceCounter] = []
     @State private var copied = false
     /// Counters captured with "기준 저장". Comparing against them shows which
-    /// interface grew during a test (for example a hotspot download).
+    /// interface grew during a network measurement test.
     @State private var baseline: [String: NetworkInterfaceCounter] = [:]
     @State private var baselineDate: Date?
 
@@ -150,7 +140,6 @@ struct InterfaceDiagnosticsView: View {
         switch value {
         case .cellular: "셀룰러 후보"
         case .wifi: "Wi-Fi"
-        case .hotspotCandidate: "핫스팟 후보"
         case .vpn: "VPN/터널"
         case .loopback: "루프백"
         case .unknown: "알 수 없음"
@@ -161,7 +150,6 @@ struct InterfaceDiagnosticsView: View {
         switch value {
         case .cellular: "cellular"
         case .wifi: "wifi"
-        case .hotspotCandidate: "hotspot-candidate"
         case .vpn: "vpn"
         case .loopback: "loopback"
         case .unknown: "unknown"

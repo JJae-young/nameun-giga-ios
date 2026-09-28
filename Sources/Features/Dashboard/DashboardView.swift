@@ -7,12 +7,8 @@ struct DashboardView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.dvTheme) private var theme
     @State private var showingCarrierSync = false
-    @State private var showingHotspotSync = false
 
     private var summary: WidgetSummary { appModel.summary }
-    private var showsHotspotCard: Bool {
-        appModel.plan?.hotspot != nil || summary.hotspotBytes != nil
-    }
     private var resetLabel: String {
         summary.periodEnd.formatted(billingFormat(.dateTime.month(.defaultDigits).day()))
     }
@@ -29,9 +25,6 @@ struct DashboardView: View {
                 LazyVStack(spacing: DVSpacing.l) {
                     hero
                     metrics
-                    if showsHotspotCard {
-                        HotspotUsageCard { showingHotspotSync = true }
-                    }
                     carrierSyncCard
                     recentUsage
                     measurementFooter
@@ -67,9 +60,6 @@ struct DashboardView: View {
             }
             .sheet(isPresented: $showingCarrierSync) {
                 CarrierUsageSyncView()
-            }
-            .sheet(isPresented: $showingHotspotSync) {
-                HotspotUsageSyncView()
             }
         }
     }
@@ -223,7 +213,7 @@ struct DashboardView: View {
         MetricTile(
             icon: "antenna.radiowaves.left.and.right",
             title: "현재 사용량",
-            value: DataAmountFormatter.string(from: summary.iPhoneBytes ?? summary.usedBytes),
+            value: DataAmountFormatter.string(from: summary.usedBytes),
             caption: appModel.plan?.manualAdjustmentPeriodStart == nil ? "앱 측정 기준" : "통신사 기준값 반영",
             tint: theme.accentSkyForeground,
             surface: theme.tintSky
@@ -336,7 +326,7 @@ struct DashboardView: View {
             guard let date = calendar.date(byAdding: .day, value: offset - 6, to: .now) else { return nil }
             let day = calendar.startOfDay(for: date)
             return appModel.dailyUsage.first(where: { calendar.isDate($0.id, inSameDayAs: day) })
-                ?? DailyUsage(id: day, cellularBytes: 0, hotspotBytes: nil, totalBytes: 0)
+                ?? DailyUsage(id: day, cellularBytes: 0, totalBytes: 0)
         }
     }
 

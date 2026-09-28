@@ -114,7 +114,6 @@ final class WidgetSummaryPresentationTests: XCTestCase {
             dailyUsage: [DailyUsage(
                 id: calendar.startOfDay(for: now),
                 cellularBytes: 2 * DataBytes.gigabyte,
-                hotspotBytes: nil,
                 totalBytes: 2 * DataBytes.gigabyte
             )],
             at: now,

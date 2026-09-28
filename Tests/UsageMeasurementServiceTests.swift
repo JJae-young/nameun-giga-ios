@@ -677,7 +677,6 @@ final class UsageMeasurementServiceTests: XCTestCase {
                 from: springStart,
                 to: springEnd,
                 cellularBytes: 4_700,
-                hotspotBytes: nil,
                 measurementQuality: .estimated
             ),
             bytes: 4_700,
@@ -711,7 +710,6 @@ final class UsageMeasurementServiceTests: XCTestCase {
                 from: start,
                 to: end,
                 cellularBytes: 4_900,
-                hotspotBytes: nil,
                 measurementQuality: .estimated
             ),
             bytes: 4_900,
@@ -1092,7 +1090,6 @@ final class UsageMeasurementServiceTests: XCTestCase {
             from: start,
             to: end,
             cellularBytes: 500,
-            hotspotBytes: nil,
             measurementQuality: .verified
         )
 
@@ -1120,7 +1117,6 @@ final class UsageMeasurementServiceTests: XCTestCase {
                 from: start,
                 to: firstEnd,
                 cellularBytes: 500,
-                hotspotBytes: nil,
                 measurementQuality: .verified
             ),
             bytes: 500,
@@ -1135,7 +1131,6 @@ final class UsageMeasurementServiceTests: XCTestCase {
                 from: start,
                 to: secondEnd,
                 cellularBytes: 700,
-                hotspotBytes: nil,
                 measurementQuality: .verified
             ),
             bytes: 700,
@@ -1160,7 +1155,6 @@ final class UsageMeasurementServiceTests: XCTestCase {
             DailyUsage(
                 id: Date(timeIntervalSince1970: 1),
                 cellularBytes: 19_682_023_970,
-                hotspotBytes: nil,
                 totalBytes: 19_682_023_970
             )
         ]
@@ -1197,7 +1191,6 @@ final class UsageMeasurementServiceTests: XCTestCase {
             DailyUsage(
                 id: measuredAt,
                 cellularBytes: 123,
-                hotspotBytes: nil,
                 totalBytes: 123
             )
         ]
@@ -1207,7 +1200,6 @@ final class UsageMeasurementServiceTests: XCTestCase {
                 from: measuredAt.addingTimeInterval(-60),
                 to: measuredAt,
                 cellularBytes: 123,
-                hotspotBytes: nil,
                 measurementQuality: .verified
             )
         ]

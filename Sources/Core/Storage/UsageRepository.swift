@@ -23,13 +23,6 @@ struct UsageRepository {
         static let empty = MeasurementState(snapshot: nil, samples: [], daily: [])
     }
 
-    /// Daily buckets keep cellular (the billed total) and hotspot (a subset
-    /// of cellular, tracked for tethering allowances) separately.
-    private enum DailyBucketKind {
-        case cellular
-        case hotspot
-    }
-
     private static let currentMeasurementSchemaVersion = 3
     private static let lock = NSLock()
 
@@ -105,8 +98,7 @@ struct UsageRepository {
         to end: Date,
         calendar: Calendar = .current,
         expectedPreviousMeasuredAt: Date? = nil,
-        allocations: [UsageIntervalAllocation]? = nil,
-        hotspotAllocations: [UsageIntervalAllocation] = []
+        allocations: [UsageIntervalAllocation]? = nil
     ) throws -> Bool {
         try withLock {
             var state = try loadStateForMutation()
@@ -140,16 +132,6 @@ struct UsageRepository {
             } else {
                 add(bytes: bytes, from: start, to: end, to: &state.daily, calendar: calendar)
             }
-            for allocation in hotspotAllocations {
-                add(
-                    bytes: allocation.bytes,
-                    from: allocation.from,
-                    to: allocation.to,
-                    to: &state.daily,
-                    calendar: calendar,
-                    kind: .hotspot
-                )
-            }
             trimDaily(&state.daily)
             state.snapshot = snapshot
             try save(state)
@@ -169,14 +151,13 @@ struct UsageRepository {
         from start: Date,
         to end: Date,
         to values: inout [DailyUsage],
-        calendar: Calendar,
-        kind: DailyBucketKind = .cellular
+        calendar: Calendar
     ) {
         guard bytes > 0 else { return }
 
         let totalDuration = end.timeIntervalSince(start)
         guard totalDuration > 0, totalDuration.isFinite else {
-            add(bytes: bytes, on: end, to: &values, calendar: calendar, kind: kind)
+            add(bytes: bytes, on: end, to: &values, calendar: calendar)
             return
         }
 
@@ -187,7 +168,7 @@ struct UsageRepository {
             let day = calendar.startOfDay(for: cursor)
             guard let nextDay = calendar.date(byAdding: .day, value: 1, to: day),
                   nextDay > cursor else {
-                add(bytes: remainingBytes, on: end, to: &values, calendar: calendar, kind: kind)
+                add(bytes: remainingBytes, on: end, to: &values, calendar: calendar)
                 break
             }
 
@@ -202,7 +183,7 @@ struct UsageRepository {
                 allocation = min(remainingBytes, max(0, proportional))
             }
 
-            add(bytes: allocation, on: cursor, to: &values, calendar: calendar, kind: kind)
+            add(bytes: allocation, on: cursor, to: &values, calendar: calendar)
             remainingBytes -= allocation
             cursor = segmentEnd
         }
@@ -212,28 +193,15 @@ struct UsageRepository {
         bytes: Int64,
         on date: Date,
         to values: inout [DailyUsage],
-        calendar: Calendar,
-        kind: DailyBucketKind = .cellular
+        calendar: Calendar
     ) {
         guard bytes > 0 else { return }
         let day = calendar.startOfDay(for: date)
         if let index = values.firstIndex(where: { calendar.isDate($0.id, inSameDayAs: day) }) {
-            switch kind {
-            case .cellular:
-                values[index].cellularBytes = safeAdd(values[index].cellularBytes, bytes)
-                values[index].totalBytes = safeAdd(values[index].totalBytes, bytes)
-            case .hotspot:
-                // Hotspot is already inside the cellular total; never add it
-                // to `totalBytes` a second time.
-                values[index].hotspotBytes = safeAdd(values[index].hotspotBytes ?? 0, bytes)
-            }
+            values[index].cellularBytes = safeAdd(values[index].cellularBytes, bytes)
+            values[index].totalBytes = safeAdd(values[index].totalBytes, bytes)
         } else {
-            switch kind {
-            case .cellular:
-                values.append(DailyUsage(id: day, cellularBytes: bytes, hotspotBytes: nil, totalBytes: bytes))
-            case .hotspot:
-                values.append(DailyUsage(id: day, cellularBytes: 0, hotspotBytes: bytes, totalBytes: 0))
-            }
+            values.append(DailyUsage(id: day, cellularBytes: bytes, totalBytes: bytes))
         }
     }
 

@@ -7,15 +7,8 @@ struct PlanSetupView: View {
     @State private var draft: PlanSettings
     @State private var limitText: String
     @State private var currentUsageText: String
-    @State private var tracksHotspotLimit: Bool
-    @State private var hotspotLimitText: String
-    @State private var hotspotUsageText = ""
-    @State private var hotspotAlert80: Bool
-    @State private var hotspotAlert90: Bool
     private let isInitialSetup: Bool
     private let isResettingInputs: Bool
-    /// The plan already tracked a hotspot allowance before this form opened.
-    private let hadHotspotLimit: Bool
     let onSave: (PlanSettings) -> Void
 
     init(
@@ -42,18 +35,8 @@ struct PlanSetupView: View {
                 ? DataAmountFormatter.gigabyteInput(from: plan.manualAdjustmentBytes)
                 : ""
         )
-        let hotspot = plan.hotspot
-        _tracksHotspotLimit = State(initialValue: hotspot?.hasLimit ?? false)
-        _hotspotLimitText = State(
-            initialValue: (hotspot?.hasLimit ?? false)
-                ? DataAmountFormatter.gigabyteInput(from: hotspot?.limitBytes ?? 0)
-                : ""
-        )
-        _hotspotAlert80 = State(initialValue: isInitialSetup ? false : (hotspot?.alert80 ?? true))
-        _hotspotAlert90 = State(initialValue: isInitialSetup ? false : (hotspot?.alert90 ?? true))
         self.isInitialSetup = isInitialSetup
         self.isResettingInputs = isResettingInputs
-        self.hadHotspotLimit = !isInitialSetup && (plan.hotspot?.hasLimit ?? false)
         self.onSave = onSave
     }
 
@@ -64,43 +47,9 @@ struct PlanSetupView: View {
         }
         return DataAmountFormatter.gigabytes(from: currentUsageText, allowingZero: true)
     }
-    private var parsedHotspotLimit: Int64? { DataAmountFormatter.gigabytes(from: hotspotLimitText) }
-    private var parsedHotspotUsage: Int64? {
-        if hotspotUsageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return 0
-        }
-        return DataAmountFormatter.gigabytes(from: hotspotUsageText, allowingZero: true)
-    }
-    /// Installing (or enabling the allowance) mid-period: the hotspot already
-    /// used this period can only come from the carrier, so ask for it.
-    private var asksHotspotUsage: Bool { isInitialSetup || !hadHotspotLimit }
-    private var hotspotLimitMessage: String? {
-        guard let parsedHotspotLimit else { return nil }
-        return HotspotPlanValidator.limitMessage(
-            hotspotLimitBytes: parsedHotspotLimit,
-            dataLimitBytes: draft.isUnlimited ? nil : parsedLimit
-        )
-    }
-    private var hotspotUsageMessage: String? {
-        guard asksHotspotUsage,
-              !hotspotUsageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-              let used = parsedHotspotUsage else { return nil }
-        return HotspotPlanValidator.usageMessage(
-            hotspotUsedBytes: used,
-            hotspotLimitBytes: parsedHotspotLimit,
-            dataUsedBytes: isInitialSetup ? parsedCurrentUsage : nil
-        )
-    }
-    private var isHotspotValid: Bool {
-        guard tracksHotspotLimit else { return true }
-        return parsedHotspotLimit != nil
-            && hotspotLimitMessage == nil
-            && (!asksHotspotUsage || (parsedHotspotUsage != nil && hotspotUsageMessage == nil))
-    }
     private var isValid: Bool {
         (draft.isUnlimited || parsedLimit != nil)
             && (!isInitialSetup || parsedCurrentUsage != nil)
-            && isHotspotValid
     }
 
     var body: some View {
@@ -200,8 +149,6 @@ struct PlanSetupView: View {
                         }
                     }
 
-                    hotspotSection
-
                     SectionCard {
                         VStack(alignment: .leading, spacing: DVSpacing.m) {
                             Label("데이터 사용량 알림", systemImage: "bell.fill")
@@ -264,126 +211,7 @@ struct PlanSetupView: View {
             draft.manualAdjustmentPeriodStart = nil
             draft.manualAdjustmentMeasuredBytes = nil
         }
-        applyHotspotSettings()
         onSave(draft)
     }
 
-    private var hotspotSection: some View {
-        SectionCard {
-            VStack(alignment: .leading, spacing: DVSpacing.l) {
-                Label("핫스팟(테더링) 제공량", systemImage: "personalhotspot")
-                    .font(.headline)
-                Toggle("핫스팟 제공량 설정", isOn: $tracksHotspotLimit)
-                    .accessibilityIdentifier("hotspot-limit-toggle")
-                if tracksHotspotLimit {
-                    Text("월 데이터 중 핫스팟으로 쓸 수 있는 최대량")
-                        .font(.subheadline)
-                        .foregroundStyle(theme.textSecondary)
-                    HStack {
-                        TextField("50", text: $hotspotLimitText)
-                            .font(.system(size: 24, weight: .bold, design: .rounded))
-                            .keyboardType(.decimalPad)
-                            .monospacedDigit()
-                            .accessibilityLabel("핫스팟 한도")
-                            .accessibilityIdentifier("hotspot-limit-input")
-                        Text("GB")
-                            .font(.headline)
-                            .foregroundStyle(theme.textSecondary)
-                    }
-                    .padding(DVSpacing.l)
-                    .background(theme.subtle, in: RoundedRectangle(cornerRadius: DVRadius.small))
-                    .overlay {
-                        RoundedRectangle(cornerRadius: DVRadius.small)
-                            .stroke(theme.borderSoft, lineWidth: 1)
-                    }
-                    if !hotspotLimitText.isEmpty && parsedHotspotLimit == nil {
-                        Text("0보다 크고 10,000GB 이하의 값을 입력해 주세요.")
-                            .font(.caption)
-                            .foregroundStyle(theme.danger)
-                    } else if let hotspotLimitMessage {
-                        Text(hotspotLimitMessage)
-                            .font(.caption)
-                            .foregroundStyle(theme.danger)
-                    }
-
-                    if asksHotspotUsage {
-                        Text("이번 주기에 이미 쓴 핫스팟")
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(theme.textPrimary)
-                        HStack {
-                            TextField("선택 사항", text: $hotspotUsageText)
-                                .font(.body.weight(.semibold))
-                                .keyboardType(.decimalPad)
-                                .monospacedDigit()
-                                .accessibilityLabel("현재 통신사 표시 핫스팟 사용량")
-                                .accessibilityIdentifier("hotspot-used-input")
-                            Text("GB")
-                                .font(.headline)
-                                .foregroundStyle(theme.textSecondary)
-                        }
-                        .padding(DVSpacing.m)
-                        .background(theme.subtle, in: RoundedRectangle(cornerRadius: DVRadius.small))
-                        if !hotspotUsageText.isEmpty && parsedHotspotUsage == nil {
-                            Text("0 이상 10,000GB 이하의 값을 입력하거나 비워 두세요.")
-                                .font(.caption)
-                                .foregroundStyle(theme.danger)
-                        } else if let hotspotUsageMessage {
-                            Text(hotspotUsageMessage)
-                                .font(.caption)
-                                .foregroundStyle(theme.danger)
-                        }
-                        Text("데이터 초기화일 이후에 설치했다면 통신사 앱의 핫스팟(테더링) 사용량을 입력하세요. 저장한 뒤부터 쓰는 핫스팟은 남은기가 앱이 측정해 더합니다. 비워 두면 앱이 측정한 값만 사용합니다.")
-                            .font(.footnote)
-                            .foregroundStyle(theme.textSecondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    } else {
-                        Text("이미 쓴 핫스팟 값을 고치려면 설정의 '핫스팟 값 맞추기'를 사용하세요.")
-                            .font(.footnote)
-                            .foregroundStyle(theme.textSecondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-
-                    Toggle("핫스팟 80% 사용 시 알림", isOn: $hotspotAlert80)
-                    Toggle("핫스팟 90% 사용 시 알림", isOn: $hotspotAlert90)
-                }
-                Text("예: 월 160GB 중 핫스팟은 50GB까지. 핫스팟 사용량은 전체 데이터에도 포함되며, 기기 카운터로 추정합니다(베타).")
-                    .font(.footnote)
-                    .foregroundStyle(theme.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-    }
-
-    /// Writes the hotspot section into the draft while keeping an existing
-    /// carrier hotspot calibration when only the limit or alerts change.
-    private func applyHotspotSettings() {
-        if tracksHotspotLimit, let limit = parsedHotspotLimit {
-            var hotspot = draft.hotspot ?? HotspotPlanSettings(limitBytes: limit)
-            hotspot.limitBytes = limit
-            hotspot.alert80 = hotspotAlert80
-            hotspot.alert90 = hotspotAlert90
-            let hasEnteredUsage = !hotspotUsageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-            if isInitialSetup {
-                hotspot.manualAdjustmentBytes = parsedHotspotUsage ?? 0
-                hotspot.manualAdjustmentPeriodStart = nil
-                hotspot.manualAdjustmentMeasuredBytes = nil
-            } else if asksHotspotUsage, hasEnteredUsage, let used = parsedHotspotUsage {
-                // Enabling the allowance mid-period: the carrier's current
-                // hotspot figure becomes this period's base, anchored on save.
-                hotspot.manualAdjustmentBytes = used
-                hotspot.manualAdjustmentPeriodStart = nil
-                hotspot.manualAdjustmentMeasuredBytes = nil
-            }
-            draft.hotspot = hotspot
-        } else if var hotspot = draft.hotspot {
-            hotspot.limitBytes = 0
-            hotspot.alert80 = false
-            hotspot.alert90 = false
-            if hotspot.manualAdjustmentPeriodStart == nil && hotspot.manualAdjustmentBytes == 0 {
-                draft.hotspot = nil
-            } else {
-                draft.hotspot = hotspot
-            }
-        }
-    }
 }

@@ -345,27 +345,14 @@ private struct MediumWidgetView: View {
                             .lineLimit(1)
                             .padding(.trailing, 38)
                             .invalidatableContent()
-                        if entry.summary.hotspotBytes != nil {
-                            // The used total is already in the headline, so the
-                            // first slot shows the separate hotspot allowance.
-                            WidgetMetric(
-                                icon: "personalhotspot",
-                                title: "핫스팟",
-                                value: hotspotValue,
-                                tint: theme.accentLavenderForeground,
-                                surface: theme.tintLavender,
-                                renderingMode: renderingMode
-                            )
-                        } else {
-                            WidgetMetric(
-                                icon: "antenna.radiowaves.left.and.right",
-                                title: "현재 사용량",
-                                value: DataAmountFormatter.string(from: entry.summary.iPhoneBytes ?? entry.summary.usedBytes),
-                                tint: theme.accentSkyForeground,
-                                surface: theme.tintSky,
-                                renderingMode: renderingMode
-                            )
-                        }
+                        WidgetMetric(
+                            icon: "antenna.radiowaves.left.and.right",
+                            title: "현재 사용량",
+                            value: DataAmountFormatter.string(from: entry.summary.usedBytes),
+                            tint: theme.accentSkyForeground,
+                            surface: theme.tintSky,
+                            renderingMode: renderingMode
+                        )
                         WidgetMetric(
                             icon: "sun.max.fill",
                             title: "오늘 사용",
@@ -434,15 +421,6 @@ private struct MediumWidgetView: View {
                 WidgetUpdateStatus(entry: entry)
             }
         }
-    }
-
-    private var hotspotValue: String {
-        guard entry.presentation.hasCurrentPeriodUsage,
-              let used = entry.summary.hotspotBytes else { return "갱신 필요" }
-        if let remaining = entry.summary.hotspotRemainingBytes {
-            return "\(DataAmountFormatter.remainingString(from: remaining)) 남음"
-        }
-        return DataAmountFormatter.string(from: used)
     }
 
     private var totalLabel: String {

@@ -22,9 +22,6 @@ struct PlanSettings: Codable, Equatable {
     var billingTimeZoneIdentifier: String?
     var createdAt: Date
     var updatedAt: Date
-    /// Separate tethering allowance. Optional so plans saved by older builds
-    /// keep decoding without it.
-    var hotspot: HotspotPlanSettings? = nil
 
     static var standard: PlanSettings {
         PlanSettings(
@@ -44,43 +41,20 @@ struct PlanSettings: Codable, Equatable {
     }
 }
 
-/// Many carriers meter Personal Hotspot (tethering) against its own
-/// allowance inside the main plan. `limitBytes == 0` means the user only
-/// tracks hotspot usage without a limit.
-struct HotspotPlanSettings: Codable, Equatable {
-    var limitBytes: Int64
-    var alert80: Bool
-    var alert90: Bool
-    var manualAdjustmentBytes: Int64
-    var manualAdjustmentPeriodStart: Date?
-    var manualAdjustmentMeasuredBytes: Int64?
-
-    init(
-        limitBytes: Int64,
-        alert80: Bool = true,
-        alert90: Bool = true,
-        manualAdjustmentBytes: Int64 = 0,
-        manualAdjustmentPeriodStart: Date? = nil,
-        manualAdjustmentMeasuredBytes: Int64? = nil
-    ) {
-        self.limitBytes = limitBytes
-        self.alert80 = alert80
-        self.alert90 = alert90
-        self.manualAdjustmentBytes = manualAdjustmentBytes
-        self.manualAdjustmentPeriodStart = manualAdjustmentPeriodStart
-        self.manualAdjustmentMeasuredBytes = manualAdjustmentMeasuredBytes
-    }
-
-    var hasLimit: Bool { limitBytes > 0 }
-}
-
 enum InterfaceClassification: String, Codable, CaseIterable {
     case cellular
     case wifi
-    case hotspotCandidate
     case vpn
     case loopback
     case unknown
+
+    /// Retired or future classifications must not invalidate the entire
+    /// saved counter snapshot and discard the cellular baseline.
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let value = try container.decode(String.self)
+        self = Self(rawValue: value) ?? .unknown
+    }
 }
 
 enum MeasurementQuality: String, Codable {
@@ -88,12 +62,6 @@ enum MeasurementQuality: String, Codable {
     case estimated
     case partial
     case unavailable
-}
-
-enum HotspotSupportState: String, Codable {
-    case unsupported
-    case experimental
-    case verified
 }
 
 struct NetworkInterfaceCounter: Codable, Equatable, Identifiable {
@@ -169,14 +137,12 @@ struct UsageSample: Codable, Identifiable, Equatable {
     let from: Date
     let to: Date
     let cellularBytes: Int64
-    let hotspotBytes: Int64?
     let measurementQuality: MeasurementQuality
 }
 
 struct DailyUsage: Codable, Identifiable, Equatable {
     let id: Date
     var cellularBytes: Int64
-    var hotspotBytes: Int64?
     var totalBytes: Int64
 }
 
@@ -189,16 +155,11 @@ struct WidgetSummary: Codable, Equatable {
     let remainingBytes: Int64?
     let usagePercent: Double?
     let iPhoneBytes: Int64?
-    let hotspotBytes: Int64?
-    let hotspotSupportState: HotspotSupportState
     let todayBytes: Int64
     // Optional metadata keeps summaries from older app/widget versions readable.
     var isUnlimited: Bool? = nil
     var billingTimeZoneIdentifier: String? = nil
     var measurementQuality: MeasurementQuality? = nil
-    var hotspotLimitBytes: Int64? = nil
-    var hotspotRemainingBytes: Int64? = nil
-    var hotspotUsagePercent: Double? = nil
 
     var hasRefreshTimestamp: Bool { generatedAt.timeIntervalSince1970 > 0 }
 
@@ -212,8 +173,6 @@ struct WidgetSummary: Codable, Equatable {
             remainingBytes: nil,
             usagePercent: nil,
             iPhoneBytes: 0,
-            hotspotBytes: nil,
-            hotspotSupportState: .unsupported,
             todayBytes: 0
         )
     }
@@ -231,8 +190,6 @@ struct WidgetSummary: Codable, Equatable {
             remainingBytes: limit - used,
             usagePercent: Double(used) / Double(limit),
             iPhoneBytes: used,
-            hotspotBytes: nil,
-            hotspotSupportState: .unsupported,
             todayBytes: Int64(1.2 * Double(DataBytes.gigabyte))
         )
     }

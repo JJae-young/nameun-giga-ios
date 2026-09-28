@@ -10,6 +10,7 @@
 		01D6EFCB4A3FB57EAB2C27B3 /* NetworkCounterReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEBE8B5092BDACF1101B0C6 /* NetworkCounterReader.swift */; };
 		09F8FBD2A7BAF12E493606A9 /* RefreshUsageIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BC93E1434235C46578A007 /* RefreshUsageIntent.swift */; };
 		0CC1FE8104C54FF5DB9937C1 /* UsageHistorySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45137CBCC32BCD018FD25A59 /* UsageHistorySummary.swift */; };
+		10FBC3D3918C0423B87A8BA0 /* LegacyDataCompatibilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954182EFEA78955D547373F5 /* LegacyDataCompatibilityTests.swift */; };
 		12CAE9AFB9BBBE5969D93F89 /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5673E8733A963C742A9B30 /* DesignTokens.swift */; };
 		16848C3D32A95025BEDC3946 /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5673E8733A963C742A9B30 /* DesignTokens.swift */; };
 		18191D99A08FC97A4BD334B9 /* WidgetSummaryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B7F27031ECC46D29961A0D /* WidgetSummaryStore.swift */; };
@@ -19,6 +20,7 @@
 		2665D7BC47476660D2110688 /* MeasurementStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2518A58EDC7297556F6B02 /* MeasurementStatusView.swift */; };
 		2C37BB3C9EF6F04C530B25C0 /* WidgetSummaryPresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1672FB7F3DB1148839946F01 /* WidgetSummaryPresentationTests.swift */; };
 		398A28FF8A6217B18A1D7158 /* DataAmountFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD9124C00F6B0A76926225B /* DataAmountFormatterTests.swift */; };
+		3BEAB786591E7386DBC789D2 /* CellularReleaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B1C8DE1148AB33A555C448 /* CellularReleaseUITests.swift */; };
 		3E0A1BA2AEDE82CA51D3D3CB /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E177C780583D3AE599B66A /* StatisticsView.swift */; };
 		40C8C9EAC96C8CE682F63F3F /* UsageHistorySummaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAB68C5EB972B0EA5417C0C /* UsageHistorySummaryTests.swift */; };
 		4548C84E5DE711DC555B27D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72090C458C0DADE77D4ED8AF /* Assets.xcassets */; };
@@ -48,7 +50,6 @@
 		9A53C5C997D6CC5658506FD7 /* UsageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B454450AB3419BBAC8D40D4D /* UsageModels.swift */; };
 		9A79B329296C6C708991B9B7 /* WidgetAppearancePreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A933000F3828FC26F336F98 /* WidgetAppearancePreferences.swift */; };
 		9B5CF6091B47D8F77AB3A8A0 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEC5B37F9252B236ADB0534 /* DashboardView.swift */; };
-		A3A8F31DFC83ACF2F3656A4E /* HotspotUsageCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4283F099820B9702B0C13EA3 /* HotspotUsageCalculator.swift */; };
 		AD564116EDC20E4E6895CDE0 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD072AAF369EB60ACDB218DB /* RootView.swift */; };
 		AF9D9954E499D1D4145622ED /* RemainingAmountLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B623CB2A788D549F8124EA /* RemainingAmountLayoutTests.swift */; };
 		B118D609C2ECD47DF3A9216E /* UsageSummaryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE2234B17999C0223C0A4BB /* UsageSummaryBuilder.swift */; };
@@ -56,17 +57,14 @@
 		B5D6836891FDD188CD3A1763 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB93B909A531DC0E3F787232 /* SettingsView.swift */; };
 		BAE161F0FCDBCC809B0D87E6 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF5AC3E57DC391E4E753AA6 /* OnboardingView.swift */; };
 		BB28516E6A87C4647C943E42 /* DataViewWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8C7DF22C3CBEBAD5A17FD160 /* DataViewWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		C6515372350E4F4A629A80A9 /* HotspotCalibrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEDC504F35C6354734DF7DA /* HotspotCalibrationService.swift */; };
 		C6F70F96F6DE17D1469D335C /* UsageMeasurementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB3E7495D77D17F3A3F6689 /* UsageMeasurementService.swift */; };
 		CC03D55C4E6B39388DB7234F /* CounterDeltaCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B78765FC8B9F79D9DE7282 /* CounterDeltaCalculatorTests.swift */; };
 		D0F0700653840C8D93C422F7 /* InterfaceClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165502E464AD8A229BDF1BC4 /* InterfaceClassifierTests.swift */; };
 		D0F4486C04661F2B657F16C2 /* WidgetAppearancePreferencesStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C6DEB8B61C52CCC383E1C5 /* WidgetAppearancePreferencesStoreTests.swift */; };
 		DEC175DA21DA25D0802193FB /* WidgetAppearancePreferencesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A39902E0D6AF8AFBC6DA309 /* WidgetAppearancePreferencesStore.swift */; };
-		E03D56C557ED9928EAC653B9 /* HotspotMeasurementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862472A41A1C7C456B69120 /* HotspotMeasurementTests.swift */; };
 		E8D627CF4A01CF81DEDE593D /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05628D4E7D060BD77B0B4E1D /* MainTabView.swift */; };
 		E8FB221A964AB41B919ADE32 /* RefreshUsageIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BC93E1434235C46578A007 /* RefreshUsageIntent.swift */; };
 		E976F1200FCE984EF68E1FE2 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42370DE4CA64EA891EE4FF5 /* AppModel.swift */; };
-		EB9B69617A8A47A4537EC850 /* HotspotUsageViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D3C6D593607598C3B4202D /* HotspotUsageViews.swift */; };
 		EFDC7B3AC922B639E268A254 /* DataAmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EC1562512A844BB56A7C07 /* DataAmountFormatter.swift */; };
 		F18121962AE9999A22F0D784 /* PlanSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54E58BD1783CDCE808302A0 /* PlanSetupView.swift */; };
 		F2E15B4A7837278D2BC8FD44 /* UsageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B454450AB3419BBAC8D40D4D /* UsageModels.swift */; };
@@ -118,16 +116,13 @@
 		12F9C84368C192C6F1A4081F /* WidgetSummaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSummaryRepository.swift; sourceTree = "<group>"; };
 		165502E464AD8A229BDF1BC4 /* InterfaceClassifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceClassifierTests.swift; sourceTree = "<group>"; };
 		1672FB7F3DB1148839946F01 /* WidgetSummaryPresentationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSummaryPresentationTests.swift; sourceTree = "<group>"; };
-		1862472A41A1C7C456B69120 /* HotspotMeasurementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotspotMeasurementTests.swift; sourceTree = "<group>"; };
 		1A59A2C1071E138ED6F27AD7 /* DataView.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DataView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		218EA715D3DB2A8DBB5E3E78 /* InterfaceClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceClassifier.swift; sourceTree = "<group>"; };
 		2A39902E0D6AF8AFBC6DA309 /* WidgetAppearancePreferencesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetAppearancePreferencesStore.swift; sourceTree = "<group>"; };
 		2AF5AC3E57DC391E4E753AA6 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		2EA78FB1434A158D4E2B638C /* UsageRefreshService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageRefreshService.swift; sourceTree = "<group>"; };
-		4283F099820B9702B0C13EA3 /* HotspotUsageCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotspotUsageCalculator.swift; sourceTree = "<group>"; };
 		45137CBCC32BCD018FD25A59 /* UsageHistorySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageHistorySummary.swift; sourceTree = "<group>"; };
 		453678A8B30D4AFA9C9B1E52 /* UsageNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageNotificationService.swift; sourceTree = "<group>"; };
-		47D3C6D593607598C3B4202D /* HotspotUsageViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotspotUsageViews.swift; sourceTree = "<group>"; };
 		519A55B4E3EAA2841053F0C3 /* DataViewWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewWidgetBundle.swift; sourceTree = "<group>"; };
 		52E177C780583D3AE599B66A /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		56D41A5359539F211CB63242 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -147,7 +142,8 @@
 		8C3316ABCC25B3F70E8A3A75 /* BillingPeriodServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingPeriodServiceTests.swift; sourceTree = "<group>"; };
 		8C49AF2E21A04899B8767BF7 /* ResetInputsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetInputsUITests.swift; sourceTree = "<group>"; };
 		8C7DF22C3CBEBAD5A17FD160 /* DataViewWidgets.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = DataViewWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		8EEDC504F35C6354734DF7DA /* HotspotCalibrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotspotCalibrationService.swift; sourceTree = "<group>"; };
+		92B1C8DE1148AB33A555C448 /* CellularReleaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellularReleaseUITests.swift; sourceTree = "<group>"; };
+		954182EFEA78955D547373F5 /* LegacyDataCompatibilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyDataCompatibilityTests.swift; sourceTree = "<group>"; };
 		99730474A31B5FF8ACE4C458 /* DataViewWidgetUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DataViewWidgetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D316981DC2A45819EE90EB2 /* SettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
 		A310EC68C54C9E632E53C3FB /* DataViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewApp.swift; sourceTree = "<group>"; };
@@ -179,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				F8819442699664FC1FFD631D /* BillingPeriodService.swift */,
-				8EEDC504F35C6354734DF7DA /* HotspotCalibrationService.swift */,
 				45137CBCC32BCD018FD25A59 /* UsageHistorySummary.swift */,
 				6BE2234B17999C0223C0A4BB /* UsageSummaryBuilder.swift */,
 			);
@@ -192,8 +187,8 @@
 				8C3316ABCC25B3F70E8A3A75 /* BillingPeriodServiceTests.swift */,
 				79B78765FC8B9F79D9DE7282 /* CounterDeltaCalculatorTests.swift */,
 				7CD9124C00F6B0A76926225B /* DataAmountFormatterTests.swift */,
-				1862472A41A1C7C456B69120 /* HotspotMeasurementTests.swift */,
 				165502E464AD8A229BDF1BC4 /* InterfaceClassifierTests.swift */,
+				954182EFEA78955D547373F5 /* LegacyDataCompatibilityTests.swift */,
 				E8B623CB2A788D549F8124EA /* RemainingAmountLayoutTests.swift */,
 				ABAB68C5EB972B0EA5417C0C /* UsageHistorySummaryTests.swift */,
 				884BCD0D064DCFC318D9FDBB /* UsageMeasurementServiceTests.swift */,
@@ -289,7 +284,6 @@
 			isa = PBXGroup;
 			children = (
 				7EEC5B37F9252B236ADB0534 /* DashboardView.swift */,
-				47D3C6D593607598C3B4202D /* HotspotUsageViews.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -298,7 +292,6 @@
 			isa = PBXGroup;
 			children = (
 				ABB840FCE5327DF0219B5A7D /* CounterDeltaCalculator.swift */,
-				4283F099820B9702B0C13EA3 /* HotspotUsageCalculator.swift */,
 				218EA715D3DB2A8DBB5E3E78 /* InterfaceClassifier.swift */,
 				AFEBE8B5092BDACF1101B0C6 /* NetworkCounterReader.swift */,
 				6F93832E7DF4F580D9B8BB52 /* SystemBootTimeReader.swift */,
@@ -402,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				CDD733CD9448F6B708529709 /* CarrierUsageSyncUITests.swift */,
+				92B1C8DE1148AB33A555C448 /* CellularReleaseUITests.swift */,
 				B4636361DBBBC8BD76F8B5A3 /* DataViewWidgetUITests.swift */,
 				8C49AF2E21A04899B8767BF7 /* ResetInputsUITests.swift */,
 			);
@@ -594,9 +588,6 @@
 				EFDC7B3AC922B639E268A254 /* DataAmountFormatter.swift in Sources */,
 				6EDDE16BF2819CFA11412A7A /* DataViewApp.swift in Sources */,
 				12CAE9AFB9BBBE5969D93F89 /* DesignTokens.swift in Sources */,
-				C6515372350E4F4A629A80A9 /* HotspotCalibrationService.swift in Sources */,
-				A3A8F31DFC83ACF2F3656A4E /* HotspotUsageCalculator.swift in Sources */,
-				EB9B69617A8A47A4537EC850 /* HotspotUsageViews.swift in Sources */,
 				77BF41FC4E6042663692CA6C /* InterfaceClassifier.swift in Sources */,
 				E8D627CF4A01CF81DEDE593D /* MainTabView.swift in Sources */,
 				2665D7BC47476660D2110688 /* MeasurementStatusView.swift in Sources */,
@@ -631,8 +622,8 @@
 				4CEEDD5E939C6949845796D8 /* BillingPeriodServiceTests.swift in Sources */,
 				CC03D55C4E6B39388DB7234F /* CounterDeltaCalculatorTests.swift in Sources */,
 				398A28FF8A6217B18A1D7158 /* DataAmountFormatterTests.swift in Sources */,
-				E03D56C557ED9928EAC653B9 /* HotspotMeasurementTests.swift in Sources */,
 				D0F0700653840C8D93C422F7 /* InterfaceClassifierTests.swift in Sources */,
+				10FBC3D3918C0423B87A8BA0 /* LegacyDataCompatibilityTests.swift in Sources */,
 				AF9D9954E499D1D4145622ED /* RemainingAmountLayoutTests.swift in Sources */,
 				40C8C9EAC96C8CE682F63F3F /* UsageHistorySummaryTests.swift in Sources */,
 				6B6C286099FBB2B45D5D40B5 /* UsageMeasurementServiceTests.swift in Sources */,
@@ -648,6 +639,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EDE53F5AA6C3F0196D15C05 /* CarrierUsageSyncUITests.swift in Sources */,
+				3BEAB786591E7386DBC789D2 /* CellularReleaseUITests.swift in Sources */,
 				90D546B81EA412CEFD82383A /* DataViewWidgetUITests.swift in Sources */,
 				1AFFA61D99487C13AE09C492 /* ResetInputsUITests.swift in Sources */,
 			);
@@ -710,7 +702,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 9282;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -817,7 +809,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 9282;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;

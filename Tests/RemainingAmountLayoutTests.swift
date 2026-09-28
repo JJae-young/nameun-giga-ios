@@ -15,17 +15,12 @@ final class RemainingAmountLayoutTests: XCTestCase {
         plan.alert80 = false
         plan.alert90 = false
         plan.manualAdjustmentBytes = 107_300_000_000
-        plan.hotspot = HotspotPlanSettings(
-            limitBytes: 50 * DataBytes.gigabyte, alert80: false, alert90: false,
-            manualAdjustmentBytes: 28_600_000_000
-        )
         try settings.save(plan: plan)
         let model = AppModel(
             settingsRepository: settings,
             usageRepository: UsageRepository(defaults: defaults)
         )
         XCTAssertEqual(model.summary.remainingBytes, 52_700_000_000)
-        XCTAssertEqual(model.summary.hotspotRemainingBytes, 21_400_000_000)
 
         for (name, size) in [
             ("remaining-phone", CGSize(width: 375, height: 812)),
@@ -36,10 +31,6 @@ final class RemainingAmountLayoutTests: XCTestCase {
                 name: name, size: size
             )
         }
-        try await capture(
-            HotspotUsageCard(onSync: {}).environmentObject(model).padding(16),
-            name: "remaining-hotspot-phone", size: CGSize(width: 375, height: 370)
-        )
     }
 
     private func capture<Content: View>(

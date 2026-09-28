@@ -18,7 +18,6 @@ final class AppModel: ObservableObject {
     private let billingService = BillingPeriodService()
     let billingCalendar: Calendar
     private let calibrationService = UsageCalibrationService()
-    private let hotspotCalibrationService = HotspotCalibrationService()
     private let summaryBuilder = UsageSummaryBuilder()
 
     init(
@@ -65,25 +64,11 @@ final class AppModel: ObservableObject {
             // Reconfiguration also anchors an explicit zero. Simply removing
             // the old adjustment would expose all previously measured bytes.
             let needsDataAnchor = resettingInputs || (plan == nil && value.manualAdjustmentBytes > 0)
-            let needsHotspotAnchor = (resettingInputs && value.hotspot != nil)
-                || ((value.hotspot?.manualAdjustmentBytes ?? 0) > 0
-                    && value.hotspot?.manualAdjustmentPeriodStart == nil)
-            if needsDataAnchor || needsHotspotAnchor {
+            if needsDataAnchor {
                 // Initial setup accepts the same current carrier amount as
                 // manual sync. Traffic accumulated while filling the form is
                 // already included, so anchor it to a fresh counter reading.
-                let measurement: MeasurementResult
-                if needsDataAnchor {
-                    measurement = try measurementService.prepareCalibrationBaseline(at: now)
-                } else if let fresh = try? measurementService.measure(at: now),
-                          usageRepository.latestSnapshot()?.measuredAt == now {
-                    // A hotspot-only anchor must not change cellular baselines.
-                    measurement = fresh
-                } else {
-                    // Without a readable cellular interface no hotspot traffic
-                    // can be flowing, so the last stored reading is a safe base.
-                    measurement = MeasurementResult(measuredAt: now, cellularBytes: 0, quality: lastQuality)
-                }
+                let measurement = try measurementService.prepareCalibrationBaseline(at: now)
                 lastQuality = measurement.quality
                 dailyUsage = usageRepository.dailyUsage()
                 let period = billingService.currentPeriod(
@@ -91,23 +76,13 @@ final class AppModel: ObservableObject {
                     resetDay: value.resetDay,
                     calendar: billingCalendar
                 )
-                if needsDataAnchor {
-                    value = calibrationService.calibrate(
-                        plan: value,
-                        carrierUsageBytes: value.manualAdjustmentBytes,
-                        measuredBytes: measuredBytes(in: period),
-                        period: period,
-                        at: now
-                    )
-                }
-                if needsHotspotAnchor, let hotspot = value.hotspot {
-                    value.hotspot = hotspotCalibrationService.calibrate(
-                        settings: hotspot,
-                        carrierUsageBytes: hotspot.manualAdjustmentBytes,
-                        measuredBytes: measuredHotspotBytes(in: period),
-                        period: period
-                    )
-                }
+                value = calibrationService.calibrate(
+                    plan: value,
+                    carrierUsageBytes: value.manualAdjustmentBytes,
+                    measuredBytes: measuredBytes(in: period),
+                    period: period,
+                    at: now
+                )
             }
             value.updatedAt = now
             try settingsRepository.save(plan: value)
@@ -115,8 +90,7 @@ final class AppModel: ObservableObject {
             completeOnboarding()
             errorMessage = nil
             rebuildSummary(at: now)
-            let wantsHotspotAlerts = value.hotspot.map { $0.hasLimit && ($0.alert80 || $0.alert90) } ?? false
-            if value.alert50 || value.alert80 || value.alert90 || wantsHotspotAlerts {
+            if value.alert50 || value.alert80 || value.alert90 {
                 Task {
                     guard await notificationService.requestAuthorization(),
                           let currentPlan = plan else { return }
@@ -172,56 +146,6 @@ final class AppModel: ObservableObject {
             return true
         } catch {
             errorMessage = "최신 측정값을 확인하지 못해 기준값을 저장하지 않았습니다. 다시 시도해 주세요."
-            return false
-        }
-    }
-
-    /// Saves the carrier's hotspot (tethering) usage as this period's base.
-    /// Uses an ordinary measurement rather than the data calibration baseline,
-    /// because a hotspot sync must not change how cellular traffic is counted.
-    @discardableResult
-    func saveHotspotCalibration(
-        bytes: Int64,
-        at now: Date = .now,
-        expectedPeriodStart: Date? = nil
-    ) -> Bool {
-        guard let plan else { return false }
-        let period = billingService.currentPeriod(
-            now: now,
-            resetDay: plan.resetDay,
-            calendar: billingCalendar
-        )
-        guard expectedPeriodStart == nil || expectedPeriodStart == period.start else {
-            errorMessage = "사용 주기가 바뀌었습니다. 통신사 앱을 갱신한 뒤 새 값을 입력해 주세요."
-            return false
-        }
-
-        do {
-            // Prefer a fresh reading. Without a readable cellular interface no
-            // hotspot traffic can be flowing, so the last stored reading is a
-            // safe base and the carrier value is still saved.
-            if let measurement = try? measurementService.measure(at: now),
-               usageRepository.latestSnapshot()?.measuredAt == now {
-                lastQuality = measurement.quality
-            }
-            dailyUsage = usageRepository.dailyUsage()
-
-            var updatedPlan = plan
-            let settings = plan.hotspot ?? HotspotPlanSettings(limitBytes: 0, alert80: false, alert90: false)
-            updatedPlan.hotspot = hotspotCalibrationService.calibrate(
-                settings: settings,
-                carrierUsageBytes: bytes,
-                measuredBytes: measuredHotspotBytes(in: period),
-                period: period
-            )
-            updatedPlan.updatedAt = now
-            try settingsRepository.save(plan: updatedPlan)
-            self.plan = updatedPlan
-            errorMessage = nil
-            rebuildSummary(at: now)
-            return true
-        } catch {
-            errorMessage = "핫스팟 기준값을 저장하지 못했습니다. 다시 시도해 주세요."
             return false
         }
     }
@@ -286,15 +210,6 @@ final class AppModel: ObservableObject {
         (try? NetworkCounterReader().readCounters()) ?? []
     }
 
-    private func measuredHotspotBytes(in period: DateInterval) -> Int64 {
-        dailyUsage
-            .filter { $0.id >= period.start && $0.id < period.end }
-            .reduce(Int64(0)) { lhs, rhs in
-                let (value, overflow) = lhs.addingReportingOverflow(max(0, rhs.hotspotBytes ?? 0))
-                return overflow ? Int64.max : value
-            }
-    }
-
     private func measuredBytes(in period: DateInterval) -> Int64 {
         dailyUsage
             .filter { $0.id >= period.start && $0.id < period.end }
@@ -325,7 +240,7 @@ final class AppModel: ObservableObject {
             guard let date = Calendar.current.date(byAdding: .day, value: offset - 6, to: .now) else { return nil }
             let day = Calendar.current.startOfDay(for: date)
             let bytes = Int64(value * Double(DataBytes.gigabyte))
-            return DailyUsage(id: day, cellularBytes: bytes, hotspotBytes: nil, totalBytes: bytes)
+            return DailyUsage(id: day, cellularBytes: bytes, totalBytes: bytes)
         }
     }
     #endif
