@@ -1,4 +1,4 @@
-name: DataView
+name: 남은기가
 options:
   developmentLanguage: ko
   bundleIdPrefix: com.edward
@@ -24,7 +24,7 @@ targets:
     info:
       path: Config/DataView-Info.plist
       properties:
-        CFBundleDisplayName: DataView
+        CFBundleDisplayName: 남은기가
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         CFBundleURLTypes:
@@ -78,7 +78,7 @@ targets:
     info:
       path: Config/DataViewWidgets-Info.plist
       properties:
-        CFBundleDisplayName: DataView 위젯
+        CFBundleDisplayName: 남은기가 위젯
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSExtension:

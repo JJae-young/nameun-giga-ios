@@ -1,4 +1,4 @@
-# DataView 출시 체크리스트
+# 남은기가 출시 체크리스트
 
 최종 업데이트: 2026-09-26
 
@@ -21,7 +21,7 @@
 
 - [ ] Apple Developer Program 배포 팀 선택
 - [ ] 앱 ID, 위젯 Extension ID, App Group을 배포 계정에 등록
-- [ ] 고유 App Store 이름 예약 (`DataView`는 이미 사용 중)
+- [ ] App Store Connect에서 `남은기가` 이름 예약
 - [ ] 개인정보처리방침 URL 게시 및 앱 안에 링크 연결
 - [ ] Support URL과 실제 문의처 준비
 - [ ] iPhone 전용으로 출시할지, 셀룰러 iPad까지 지원할지 결정

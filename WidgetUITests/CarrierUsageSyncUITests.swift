@@ -15,7 +15,7 @@ final class CarrierUsageSyncUITests: XCTestCase {
             XCTAssertTrue(limit.waitForExistence(timeout: 3))
             limit.tap()
             limit.typeText("160")
-            let start = app.buttons["DataView 시작하기"]
+            let start = app.buttons["남은기가 시작하기"]
             app.swipeUp()
             XCTAssertTrue(start.isEnabled)
             start.tap()

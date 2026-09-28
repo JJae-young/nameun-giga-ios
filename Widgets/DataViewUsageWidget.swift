@@ -177,7 +177,7 @@ private struct WidgetNeedsRefreshView: View {
             .accessibilityLabel(title)
         } else if family == .accessoryRectangular {
             VStack(alignment: .leading, spacing: 3) {
-                Label("DataView", systemImage: "antenna.radiowaves.left.and.right")
+                Label("남은기가", systemImage: "antenna.radiowaves.left.and.right")
                 Text(title)
             }
             .font(.caption)

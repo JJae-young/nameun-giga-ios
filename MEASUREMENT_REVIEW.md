@@ -1,4 +1,4 @@
-# DataView 사용량 점검 및 개선 — 2026-09-26
+# 남은기가 사용량 점검 및 개선 — 2026-09-26
 
 이번 작업은 소스 수정과 로컬 검증만 수행한다. 실기기 설치, TestFlight, App Store 배포는 포함하지 않는다.
 
@@ -48,7 +48,7 @@
 단위 테스트 명령:
 
 ```sh
-xcodebuild -project DataView.xcodeproj -scheme DataView -configuration Debug \
+xcodebuild -project 남은기가.xcodeproj -scheme DataView -configuration Debug \
   -destination 'platform=iOS Simulator,name=iPhone 16 (26.1)' \
   -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO test
 ```

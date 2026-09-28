@@ -1,6 +1,6 @@
-# DataView
+# 남은기가
 
-DataView는 iPhone의 셀룰러 데이터 사용량을 앱 설치 이후부터 로컬에서 집계하고, 홈 화면 및 잠금 화면 위젯에서 요약해 보여주는 iOS 17+ 앱입니다.
+남은기가는 iPhone의 셀룰러 데이터 사용량을 앱 설치 이후부터 로컬에서 집계하고, 홈 화면 및 잠금 화면 위젯에서 요약해 보여주는 iOS 17+ 앱입니다.
 
 ## 시작하기
 
@@ -8,7 +8,7 @@ Xcode 27 이상과 XcodeGen이 필요합니다.
 
 ```bash
 xcodegen generate
-open DataView.xcodeproj
+open 남은기가.xcodeproj
 ```
 
 실기기에서 앱 그룹을 사용하려면 `project.yml`과 두 entitlement 파일의 번들 식별자/App Group을 본인의 Apple Developer Team에 맞게 변경하세요. App Group을 지원하지 않는 Personal Team 빌드는 `Config/DataViewPersonal.entitlements`를 `CODE_SIGN_ENTITLEMENTS`로 지정하면 공유 Keychain을 통해 위젯 요약값을 전달합니다.

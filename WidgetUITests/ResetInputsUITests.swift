@@ -15,7 +15,7 @@ final class ResetInputsUITests: XCTestCase {
             limit.tap()
             limit.typeText("160")
             app.swipeUp()
-            app.buttons["DataView 시작하기"].tap()
+            app.buttons["남은기가 시작하기"].tap()
         }
         let settings = app.buttons["설정"].firstMatch
         XCTAssertTrue(settings.waitForExistence(timeout: 5))

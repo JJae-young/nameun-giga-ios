@@ -24,7 +24,7 @@ struct OnboardingView: View {
             VStack(spacing: 0) {
                 HStack {
                     LogoMark(height: 22)
-                    Text("DataView")
+                    Text("남은기가")
                         .font(.headline)
                     Spacer()
                     Button("건너뛰기", action: onFinished)

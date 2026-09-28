@@ -43,11 +43,11 @@ struct DashboardView: View {
             }
             .background { DataViewThemeBackground() }
             .refreshable { appModel.refresh() }
-            .navigationTitle("DataView")
+            .navigationTitle("남은기가")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     LogoMark(height: 22)
-                        .accessibilityLabel("DataView")
+                        .accessibilityLabel("남은기가")
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { appModel.refresh() } label: {
@@ -317,7 +317,7 @@ struct DashboardView: View {
     private var measurementFooter: some View {
         HStack(spacing: DVSpacing.s) {
             Image(systemName: "clock")
-            Text("DataView 추정값 · 최근 갱신 \(summary.generatedAt.formatted(date: .omitted, time: .shortened))")
+            Text("남은기가 추정값 · 최근 갱신 \(summary.generatedAt.formatted(date: .omitted, time: .shortened))")
         }
         .font(.caption)
         .foregroundStyle(theme.textTertiary)

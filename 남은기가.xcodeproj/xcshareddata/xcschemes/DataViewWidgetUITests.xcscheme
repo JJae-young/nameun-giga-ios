@@ -15,10 +15,10 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A50DCEC4D9B831E74286BE6F"
+               BlueprintIdentifier = "B3E7DD4381D7BA1424FDCEE8"
                BuildableName = "DataView.app"
                BlueprintName = "DataView"
-               ReferencedContainer = "container:DataView.xcodeproj">
+               ReferencedContainer = "container:남은기가.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,10 +29,10 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B06B8920FAFF5F31EF2356C"
+               BlueprintIdentifier = "6A987AB522FD6355C9C68B16"
                BuildableName = "DataViewWidgetUITests.xctest"
                BlueprintName = "DataViewWidgetUITests"
-               ReferencedContainer = "container:DataView.xcodeproj">
+               ReferencedContainer = "container:남은기가.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,10 +46,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A50DCEC4D9B831E74286BE6F"
+            BlueprintIdentifier = "B3E7DD4381D7BA1424FDCEE8"
             BuildableName = "DataView.app"
             BlueprintName = "DataView"
-            ReferencedContainer = "container:DataView.xcodeproj">
+            ReferencedContainer = "container:남은기가.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -58,10 +58,10 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B06B8920FAFF5F31EF2356C"
+               BlueprintIdentifier = "6A987AB522FD6355C9C68B16"
                BuildableName = "DataViewWidgetUITests.xctest"
                BlueprintName = "DataViewWidgetUITests"
-               ReferencedContainer = "container:DataView.xcodeproj">
+               ReferencedContainer = "container:남은기가.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -82,10 +82,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A50DCEC4D9B831E74286BE6F"
+            BlueprintIdentifier = "B3E7DD4381D7BA1424FDCEE8"
             BuildableName = "DataView.app"
             BlueprintName = "DataView"
-            ReferencedContainer = "container:DataView.xcodeproj">
+            ReferencedContainer = "container:남은기가.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -99,10 +99,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A50DCEC4D9B831E74286BE6F"
+            BlueprintIdentifier = "B3E7DD4381D7BA1424FDCEE8"
             BuildableName = "DataView.app"
             BlueprintName = "DataView"
-            ReferencedContainer = "container:DataView.xcodeproj">
+            ReferencedContainer = "container:남은기가.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

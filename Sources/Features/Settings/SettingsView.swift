@@ -177,7 +177,7 @@ struct SettingsView: View {
     private var versionLabel: String {
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "-"
         let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "-"
-        return "DataView \(version) (\(build))"
+        return "남은기가 \(version) (\(build))"
     }
 
     private var hotspotLabel: String {
@@ -422,7 +422,7 @@ struct CarrierUsageSyncView: View {
                     } header: {
                         Text("적용 결과")
                     } footer: {
-                        Text("이 값을 현재 사용 주기의 기준으로 저장하고, 이후 DataView가 측정한 변화량을 더합니다. 다음 사용 주기에는 자동으로 초기화됩니다.")
+                        Text("이 값을 현재 사용 주기의 기준으로 저장하고, 이후 남은기가 앱이 측정한 변화량을 더합니다. 다음 사용 주기에는 자동으로 초기화됩니다.")
                     }
                 }
 
@@ -499,7 +499,7 @@ private struct PrivacyInfoView: View {
                         .foregroundStyle(theme.accentMintStrong)
                     Text("사용량은 기기에만 저장됩니다")
                         .font(.title2.bold())
-                    Text("DataView는 계정을 요구하지 않고, 측정한 데이터 사용량을 외부 서버로 전송하지 않습니다. 위젯에는 화면 표시에 필요한 요약값만 앱 그룹을 통해 공유합니다.")
+                    Text("남은기가는 계정을 요구하지 않고, 측정한 데이터 사용량을 외부 서버로 전송하지 않습니다. 위젯에는 화면 표시에 필요한 요약값만 앱 그룹을 통해 공유합니다.")
                         .foregroundStyle(.secondary)
                         .lineSpacing(4)
                     Divider()

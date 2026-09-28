@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A50DCEC4D9B831E74286BE6F"
+               BlueprintIdentifier = "B3E7DD4381D7BA1424FDCEE8"
                BuildableName = "DataView.app"
                BlueprintName = "DataView"
-               ReferencedContainer = "container:DataView.xcodeproj">
+               ReferencedContainer = "container:남은기가.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,10 +29,10 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "64D4BBB335BEE003DD5D0427"
+               BlueprintIdentifier = "B748B5563D5530D61C212A64"
                BuildableName = "DataViewTests.xctest"
                BlueprintName = "DataViewTests"
-               ReferencedContainer = "container:DataView.xcodeproj">
+               ReferencedContainer = "container:남은기가.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,10 +43,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "638784A5E08BFB14B3FF8302"
+               BlueprintIdentifier = "FA72DF4A0E63C37E12990B4C"
                BuildableName = "DataViewWidgets.appex"
                BlueprintName = "DataViewWidgets"
-               ReferencedContainer = "container:DataView.xcodeproj">
+               ReferencedContainer = "container:남은기가.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,10 +61,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A50DCEC4D9B831E74286BE6F"
+            BlueprintIdentifier = "B3E7DD4381D7BA1424FDCEE8"
             BuildableName = "DataView.app"
             BlueprintName = "DataView"
-            ReferencedContainer = "container:DataView.xcodeproj">
+            ReferencedContainer = "container:남은기가.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -73,10 +73,10 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "64D4BBB335BEE003DD5D0427"
+               BlueprintIdentifier = "B748B5563D5530D61C212A64"
                BuildableName = "DataViewTests.xctest"
                BlueprintName = "DataViewTests"
-               ReferencedContainer = "container:DataView.xcodeproj">
+               ReferencedContainer = "container:남은기가.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -97,10 +97,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A50DCEC4D9B831E74286BE6F"
+            BlueprintIdentifier = "B3E7DD4381D7BA1424FDCEE8"
             BuildableName = "DataView.app"
             BlueprintName = "DataView"
-            ReferencedContainer = "container:DataView.xcodeproj">
+            ReferencedContainer = "container:남은기가.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -114,10 +114,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A50DCEC4D9B831E74286BE6F"
+            BlueprintIdentifier = "B3E7DD4381D7BA1424FDCEE8"
             BuildableName = "DataView.app"
             BlueprintName = "DataView"
-            ReferencedContainer = "container:DataView.xcodeproj">
+            ReferencedContainer = "container:남은기가.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -47,7 +47,7 @@ final class DataViewWidgetUITests: XCTestCase {
 
         XCTAssertTrue(
             refreshButton.waitForExistence(timeout: 5),
-            "홈 화면 첫 페이지에 DataView 소형 또는 중형 위젯이 필요합니다."
+            "홈 화면 첫 페이지에 남은기가 소형 또는 중형 위젯이 필요합니다."
         )
         XCTAssertTrue(refreshButton.isHittable)
 
@@ -94,7 +94,7 @@ final class DataViewWidgetUITests: XCTestCase {
 
         XCTAssertFalse(
             dataView.wait(for: .runningForeground, timeout: 3),
-            "새로고침 버튼이 DataView 앱 화면을 열었습니다."
+            "새로고침 버튼이 남은기가 앱 화면을 열었습니다."
         )
         XCTAssertEqual(
             springBoard.state,

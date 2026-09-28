@@ -187,7 +187,7 @@ struct PlanSetupView: View {
                                 }
                                 Text(isResettingInputs
                                     ? "통신사 앱의 현재 사용량을 입력하세요. 0을 입력하면 저장 시점부터 새로 합산합니다. 기존 일별 기록은 통계에 남아 월 사용량과 다를 수 있습니다."
-                                    : "통신사 앱에 표시된 현재 사용량을 입력하면 처음부터 반영합니다. 비워두면 DataView 설치 이후부터 측정합니다.")
+                                    : "통신사 앱에 표시된 현재 사용량을 입력하면 처음부터 반영합니다. 비워두면 남은기가 설치 이후부터 측정합니다.")
                                     .font(.footnote)
                                     .foregroundStyle(theme.textSecondary)
                                     .fixedSize(horizontal: false, vertical: true)
@@ -215,7 +215,7 @@ struct PlanSetupView: View {
                     HStack(alignment: .top, spacing: DVSpacing.m) {
                         Image(systemName: "info.circle.fill")
                             .foregroundStyle(theme.accentMintStrong)
-                        Text("DataView는 앱 설치 후 공개 네트워크 카운터의 변화량을 측정합니다. 통신사 청구량과 차이가 날 수 있어요.")
+                        Text("남은기가는 앱 설치 후 공개 네트워크 카운터의 변화량을 측정합니다. 통신사 청구량과 차이가 날 수 있어요.")
                             .font(.footnote)
                             .foregroundStyle(theme.textSecondary)
                     }
@@ -228,7 +228,7 @@ struct PlanSetupView: View {
                             .accessibilityIdentifier("plan-save-error")
                     }
 
-                    Button(isResettingInputs ? "새 설정 저장" : (isInitialSetup ? "DataView 시작하기" : "설정 저장"), action: saveDraft)
+                    Button(isResettingInputs ? "새 설정 저장" : (isInitialSetup ? "남은기가 시작하기" : "설정 저장"), action: saveDraft)
                     .buttonStyle(PrimaryButtonStyle())
                     .disabled(!isValid)
                     .opacity(isValid ? 1 : 0.45)
@@ -332,7 +332,7 @@ struct PlanSetupView: View {
                                 .font(.caption)
                                 .foregroundStyle(theme.danger)
                         }
-                        Text("데이터 초기화일 이후에 설치했다면 통신사 앱의 핫스팟(테더링) 사용량을 입력하세요. 저장한 뒤부터 쓰는 핫스팟은 DataView가 측정해 더합니다. 비워 두면 DataView가 측정한 값만 사용합니다.")
+                        Text("데이터 초기화일 이후에 설치했다면 통신사 앱의 핫스팟(테더링) 사용량을 입력하세요. 저장한 뒤부터 쓰는 핫스팟은 남은기가 앱이 측정해 더합니다. 비워 두면 앱이 측정한 값만 사용합니다.")
                             .font(.footnote)
                             .foregroundStyle(theme.textSecondary)
                             .fixedSize(horizontal: false, vertical: true)

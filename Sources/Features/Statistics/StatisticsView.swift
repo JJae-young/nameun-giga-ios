@@ -55,7 +55,7 @@ struct StatisticsView: View {
                                         .foregroundStyle(theme.accentSkyForeground)
                                     Text("측정된 사용량이 아직 없어요")
                                         .font(.headline)
-                                    Text("DataView를 사용하면 이곳에 추이가 쌓입니다.")
+                                    Text("남은기가를 사용하면 이곳에 추이가 쌓입니다.")
                                         .font(.caption)
                                         .foregroundStyle(theme.textSecondary)
                                 }
@@ -123,7 +123,7 @@ struct StatisticsView: View {
                             }
 
                             if (appModel.plan?.manualAdjustmentBytes ?? 0) > 0 {
-                                Text("통신사 사용량으로 보정한 값은 현재 사용 주기 합계에만 반영되며, 기간별 차트에는 DataView가 직접 측정한 값만 표시됩니다.")
+                                Text("통신사 사용량으로 보정한 값은 현재 사용 주기 합계에만 반영되며, 기간별 차트에는 남은기가 앱이 직접 측정한 값만 표시됩니다.")
                                     .font(.caption)
                                     .foregroundStyle(theme.textSecondary)
                                     .fixedSize(horizontal: false, vertical: true)
