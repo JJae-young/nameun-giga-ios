@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="393" height="852" viewBox="0 0 393 852">
+    <defs>
+      <linearGradient id="mintGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#8CE1D1"/><stop offset="1" stop-color="#5EC6B1"/>
+      </linearGradient>
+      <linearGradient id="pastelLine" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#A8D8FF"/><stop offset="0.55" stop-color="#74D7C4"/><stop offset="1" stop-color="#C3B5FA"/>
+      </linearGradient>
+      <radialGradient id="meshMint" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(30 40) rotate(42) scale(310 280)">
+        <stop offset="0" stop-color="#D8F7EF" stop-opacity="0.95"/><stop offset="1" stop-color="#D8F7EF" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="meshLav" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(380 820) rotate(-140) scale(360 330)">
+        <stop offset="0" stop-color="#E7E1FF" stop-opacity="0.92"/><stop offset="1" stop-color="#E7E1FF" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="meshPink" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(390 120) rotate(135) scale(230 200)">
+        <stop offset="0" stop-color="#FFE7F0" stop-opacity="0.75"/><stop offset="1" stop-color="#FFE7F0" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+        <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#36415C" flood-opacity="0.09"/>
+      </filter>
+      <filter id="smallShadow" x="-20%" y="-20%" width="140%" height="160%">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#36415C" flood-opacity="0.08"/>
+      </filter>
+      <clipPath id="screenClip"><rect width="393" height="852" rx="0"/></clipPath>
+    </defs><g clip-path="url(#screenClip)"><rect width="393" height="852" fill="#F7F9FF"/><rect width="393" height="852" fill="url(#meshMint)"/><rect width="393" height="852" fill="url(#meshLav)"/><rect width="393" height="852" fill="url(#meshPink)"/></g><text x="22" y="26" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="12" font-weight="700" fill="#20263A" text-anchor="start" >9:41</text>
+    <g fill="none" stroke="#20263A" stroke-width="1.8" stroke-linecap="round">
+      <path d="M330 24h2M336 21v3M342 18v6"/>
+      <path d="M351 21c3-3 8-3 11 0M354 24c2-2 4-2 6 0"/>
+      <rect x="369" y="17" width="16" height="8" rx="2"/><path d="M386 20v2"/>
+    </g><text x="20" y="82" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="28" font-weight="800" fill="#20263A" text-anchor="start" >데이터</text><g transform="translate(341 59)">
+    <circle cx="16" cy="16" r="16" fill="#FFFFFF" opacity="0.92"/>
+    <path d="M21 12a7 7 0 1 0 1.1 7.8M21 8v5h-5" fill="none" stroke="#176B5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+    <rect x="20" y="105" width="353" height="219" rx="24" fill="#FFFFFF" stroke="none" filter="url(#shadow)"/>
+    
+    <circle cx="101" cy="210" r="53" fill="none" stroke="#E4E9F5" stroke-width="13"/>
+    <circle cx="101" cy="210" r="53" fill="none" stroke="#74D7C4" stroke-width="13" stroke-linecap="round"
+      stroke-dasharray="150.69 182.32" transform="rotate(-90 101 210)"/>
+    <text x="101" y="218" font-family="ui-rounded,'SF Pro Rounded',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif" font-size="26" font-weight="800" fill="#20263A" text-anchor="middle" font-variant-numeric="tabular-nums">45%</text>
+    <text x="179" y="153" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="13" font-weight="600" fill="#66708A" text-anchor="start" >남은 데이터</text>
+    <text x="179" y="190" font-family="ui-rounded,'SF Pro Rounded',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif" font-size="36" font-weight="800" fill="#20263A" text-anchor="start" font-variant-numeric="tabular-nums">87.6</text>
+    <text x="269" y="190" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="15" font-weight="700" fill="#66708A" text-anchor="start" >GB</text>
+    <text x="179" y="218" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="13" font-weight="500" fill="#66708A" text-anchor="start" >160 GB 중 72.4 GB 사용</text>
+    <rect x="179" y="243" width="112" height="27" rx="13.5" fill="#EAF9F5"/>
+    <text x="235" y="261" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="11.5" font-weight="650" fill="#176B5B" text-anchor="middle" >9월 25일 갱신</text>
+    <line x1="179" y1="289" x2="340" y2="289" stroke="#E4E9F5" stroke-width="1" />
+    <text x="179" y="309" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="10.5" font-weight="500" fill="#68728B" text-anchor="start" >방금 업데이트됨</text>
+
+    <rect x="20" y="340" width="353" height="138" rx="24" fill="#FFFFFF" stroke="none" filter="url(#shadow)"/>
+    <text x="38" y="369" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="16" font-weight="700" fill="#20263A" text-anchor="start" >오늘 사용량</text>
+    <text x="337" y="369" font-family="ui-rounded,'SF Pro Rounded',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif" font-size="16" font-weight="800" fill="#20263A" text-anchor="end" font-variant-numeric="tabular-nums">1.86 GB</text>
+    <rect x="38" y="388" width="146" height="68" rx="16" fill="#EDF7FF"/>
+    <circle cx="54" cy="408" r="4" fill="#A8D8FF"/><text x="64" y="412" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="11.5" font-weight="650" fill="#66708A" text-anchor="start" >iPhone</text>
+    <text x="54" y="440" font-family="ui-rounded,'SF Pro Rounded',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif" font-size="17" font-weight="800" fill="#20263A" text-anchor="start" font-variant-numeric="tabular-nums">1.31 GB</text>
+    <rect x="192" y="388" width="163" height="68" rx="16" fill="#F2EFFF"/>
+    <circle cx="208" cy="408" r="4" fill="#C3B5FA"/><text x="218" y="412" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="11.5" font-weight="650" fill="#66708A" text-anchor="start" >핫스팟</text>
+    <text x="208" y="440" font-family="ui-rounded,'SF Pro Rounded',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif" font-size="17" font-weight="800" fill="#20263A" text-anchor="start" font-variant-numeric="tabular-nums">0.55 GB</text>
+
+    <rect x="20" y="494" width="353" height="246" rx="24" fill="#FFFFFF" stroke="none" filter="url(#shadow)"/>
+    <text x="38" y="525" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="16" font-weight="700" fill="#20263A" text-anchor="start" >최근 7일</text>
+    <text x="355" y="525" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="11.5" font-weight="600" fill="#66708A" text-anchor="end" >평균 2.1 GB</text>
+    <line x1="38" y1="595" x2="355" y2="595" stroke="#E4E9F5" stroke-width="1" /><line x1="38" y1="640" x2="355" y2="640" stroke="#E4E9F5" stroke-width="1" /><line x1="38" y1="685" x2="355" y2="685" stroke="#E4E9F5" stroke-width="1" />
+    <rect x="43" y="659" width="18" height="26" rx="9" fill="#A8D8FF" fill-opacity="0.78"/><rect x="86" y="645" width="18" height="40" rx="9" fill="#A8D8FF" fill-opacity="0.78"/><rect x="129" y="654" width="18" height="31" rx="9" fill="#A8D8FF" fill-opacity="0.78"/><rect x="172" y="636" width="18" height="49" rx="9" fill="#A8D8FF" fill-opacity="0.78"/><rect x="215" y="627" width="18" height="58" rx="9" fill="#A8D8FF" fill-opacity="0.78"/><rect x="258" y="649" width="18" height="36" rx="9" fill="#A8D8FF" fill-opacity="0.78"/><rect x="301" y="620" width="18" height="65" rx="9" fill="#176B5B" fill-opacity="1"/><text x="52" y="706" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="10.5" font-weight="500" fill="#68728B" text-anchor="middle" >목</text><text x="95" y="706" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="10.5" font-weight="500" fill="#68728B" text-anchor="middle" >금</text><text x="138" y="706" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="10.5" font-weight="500" fill="#68728B" text-anchor="middle" >토</text><text x="181" y="706" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="10.5" font-weight="500" fill="#68728B" text-anchor="middle" >일</text><text x="224" y="706" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="10.5" font-weight="500" fill="#68728B" text-anchor="middle" >월</text><text x="267" y="706" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="10.5" font-weight="500" fill="#68728B" text-anchor="middle" >화</text><text x="310" y="706" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="10.5" font-weight="700" fill="#176B5B" text-anchor="middle" >오늘</text><rect x="0" y="770" width="393" height="82" fill="#FFFFFF" fill-opacity="0.94"/><line x1="0" y1="770" x2="393" y2="770" stroke="#E4E9F5"/><rect x="24" y="777" width="48" height="28" rx="14" fill="#EAF9F5"/><g transform="translate(38 781)" fill="none" stroke="#176B5B" stroke-width="2" stroke-linecap="round"><path d="M2 16a8 8 0 1 1 16 0"/><path d="M10 16l4-5"/><circle cx="10" cy="16" r="1" fill="#176B5B"/></g><text x="48" y="824" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="10.5" font-weight="700" fill="#176B5B" text-anchor="middle" >데이터</text><g transform="translate(133 781)" fill="none" stroke="#68728B" stroke-width="2" stroke-linecap="round"><path d="M2 18V3M2 18h17"/><path d="M6 14v-4M11 14V6M16 14V2"/></g><text x="143" y="824" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="10.5" font-weight="500" fill="#68728B" text-anchor="middle" >통계</text><g transform="translate(228 781)" fill="none" stroke="#68728B" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="2" fill="#68728B"/><path d="M5 15a7 7 0 0 1 0-10M15 5a7 7 0 0 1 0 10M2 18a11 11 0 0 1 0-16M18 2a11 11 0 0 1 0 16"/></g><text x="238" y="824" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="10.5" font-weight="500" fill="#68728B" text-anchor="middle" >핫스팟</text><g transform="translate(323 781)" fill="none" stroke="#68728B" stroke-width="2"><circle cx="10" cy="10" r="3"/><circle cx="10" cy="10" r="8" stroke-dasharray="4 2"/></g><text x="333" y="824" font-family="-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="10.5" font-weight="500" fill="#68728B" text-anchor="middle" >설정</text><rect x="131" y="842" width="131" height="4" rx="2" fill="#20263A"/></svg>

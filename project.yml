@@ -1,0 +1,140 @@
+name: DataView
+options:
+  developmentLanguage: ko
+  bundleIdPrefix: com.edward
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "27.0"
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+targets:
+  DataView:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+        excludes:
+          - Features/Hotspot/HotspotDetailView.swift
+    info:
+      path: Config/DataView-Info.plist
+      properties:
+        CFBundleDisplayName: DataView
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleURLTypes:
+          - CFBundleTypeRole: Editor
+            CFBundleURLName: com.edward.DataView
+            CFBundleURLSchemes:
+              - dataview
+        UILaunchScreen:
+          UIColorName: ""
+        UIApplicationSupportsIndirectInputEvents: true
+        UIBackgroundModes:
+          - fetch
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        BGTaskSchedulerPermittedIdentifiers:
+          - com.edward.DataView.refresh
+        ITSAppUsesNonExemptEncryption: false
+        DataViewSharedKeychainGroup: $(AppIdentifierPrefix)com.edward.DataView.shared
+    entitlements:
+      path: Config/DataView.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.edward.DataView
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.edward.DataView
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+    dependencies:
+      - target: DataViewWidgets
+        embed: true
+  DataViewWidgets:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Widgets
+      - path: Sources/Shared/Models/UsageModels.swift
+      - path: Sources/Shared/Models/WidgetAppearancePreferences.swift
+      - path: Sources/Shared/Formatting/DataAmountFormatter.swift
+      - path: Sources/DesignSystem/DesignTokens.swift
+      - path: Sources/Shared/Storage/WidgetSummaryStore.swift
+      - path: Sources/Shared/Storage/WidgetAppearancePreferencesStore.swift
+      - path: Sources/Shared/Intents/RefreshUsageIntent.swift
+    info:
+      path: Config/DataViewWidgets-Info.plist
+      properties:
+        CFBundleDisplayName: DataView 위젯
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+        DataViewSharedKeychainGroup: $(AppIdentifierPrefix)com.edward.DataView.shared
+    entitlements:
+      path: Config/DataViewWidgets.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.edward.DataView
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.edward.DataView.widgets
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) WIDGET_EXTENSION"
+        SKIP_INSTALL: YES
+  DataViewTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests
+    dependencies:
+      - target: DataView
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.edward.DataViewTests
+        GENERATE_INFOPLIST_FILE: YES
+  DataViewWidgetUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: WidgetUITests
+    dependencies:
+      - target: DataView
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.edward.DataViewWidgetUITests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: DataView
+schemes:
+  DataView:
+    build:
+      targets:
+        DataView: all
+        DataViewWidgets: all
+        DataViewTests: [test]
+    test:
+      gatherCoverageData: true
+      targets:
+        - DataViewTests
+  DataViewWidgetUITests:
+    build:
+      targets:
+        DataView: [test]
+        DataViewWidgetUITests: [test]
+    test:
+      gatherCoverageData: false
+      targets:
+        - DataViewWidgetUITests

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "meta": {
+    "name": "DataView Soft Pastel",
+    "version": "1.0.0",
+    "colorSpace": "sRGB",
+    "baseGrid": 4
+  },
+  "color": {
+    "light": {
+      "background": {
+        "canvas": { "$type": "color", "$value": "#F7F9FF" },
+        "elevated": { "$type": "color", "$value": "#FFFFFF" },
+        "subtle": { "$type": "color", "$value": "#EFF4FF" }
+      },
+      "text": {
+        "primary": { "$type": "color", "$value": "#20263A" },
+        "secondary": { "$type": "color", "$value": "#66708A" },
+        "tertiary": { "$type": "color", "$value": "#68728B" }
+      },
+      "border": {
+        "soft": { "$type": "color", "$value": "#E4E9F5" }
+      }
+    },
+    "dark": {
+      "background": {
+        "canvas": { "$type": "color", "$value": "#111525" },
+        "elevated": { "$type": "color", "$value": "#1B2133" },
+        "subtle": { "$type": "color", "$value": "#232A40" }
+      },
+      "text": {
+        "primary": { "$type": "color", "$value": "#F5F7FF" },
+        "secondary": { "$type": "color", "$value": "#B9C1D7" },
+        "tertiary": { "$type": "color", "$value": "#8E98B2" }
+      },
+      "border": {
+        "soft": { "$type": "color", "$value": "#303951" }
+      }
+    },
+    "accent": {
+      "mint": { "$type": "color", "$value": "#74D7C4" },
+      "mintStrong": { "$type": "color", "$value": "#176B5B" },
+      "sky": { "$type": "color", "$value": "#A8D8FF" },
+      "lavender": { "$type": "color", "$value": "#C3B5FA" },
+      "pink": { "$type": "color", "$value": "#F7C4D7" },
+      "yellow": { "$type": "color", "$value": "#FFE2A6" }
+    },
+    "semantic": {
+      "success": { "$type": "color", "$value": "#2F7D64" },
+      "warning": { "$type": "color", "$value": "#8A5B00" },
+      "danger": { "$type": "color", "$value": "#A43A58" }
+    },
+    "tintSurface": {
+      "mint": { "$type": "color", "$value": "#EAF9F5" },
+      "sky": { "$type": "color", "$value": "#EDF7FF" },
+      "lavender": { "$type": "color", "$value": "#F2EFFF" },
+      "pink": { "$type": "color", "$value": "#FFF1F6" }
+    }
+  },
+  "space": {
+    "1": { "$type": "dimension", "$value": "4pt" },
+    "2": { "$type": "dimension", "$value": "8pt" },
+    "3": { "$type": "dimension", "$value": "12pt" },
+    "4": { "$type": "dimension", "$value": "16pt" },
+    "5": { "$type": "dimension", "$value": "20pt" },
+    "6": { "$type": "dimension", "$value": "24pt" },
+    "8": { "$type": "dimension", "$value": "32pt" },
+    "10": { "$type": "dimension", "$value": "40pt" }
+  },
+  "radius": {
+    "small": { "$type": "dimension", "$value": "12pt" },
+    "medium": { "$type": "dimension", "$value": "18pt" },
+    "large": { "$type": "dimension", "$value": "24pt" },
+    "pill": { "$type": "dimension", "$value": "999pt" }
+  },
+  "stroke": {
+    "hairline": { "$type": "dimension", "$value": "1pt" },
+    "gauge": { "$type": "dimension", "$value": "13pt" }
+  },
+  "motion": {
+    "fast": { "$type": "duration", "$value": "180ms" },
+    "standard": { "$type": "duration", "$value": "200ms" },
+    "gauge": { "$type": "duration", "$value": "350ms" }
+  }
+}
